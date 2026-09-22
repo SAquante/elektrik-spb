@@ -62,10 +62,21 @@ npm start
 
 В продакшене задайте `SITE_URL=https://ваш-домен` и HTTPS на reverse-proxy (Caddy / nginx).
 
+### GitHub Pages
+
+Workflow `.github/workflows/pages.yml` публикует **только содержимое `public/`** (HTML/CSS/JS/assets) на GitHub Pages.
+
+- Express (`server.js`), `package.json` и `.env` остаются в репозитории — Pages их не использует.
+- **Заявки формы (`POST /api/lead`) и Telegram-бот работают только когда крутится Node** (VPS / Railway / Render). На чистом Pages API нет: форма показывает ошибку и предлагает написать в [Telegram](https://t.me/li4niirobotbot_bot) или позвонить.
+- Локально и на сервере: `npm install && npm start` — как раньше.
+
+В Settings → Pages выберите Source: **GitHub Actions** (не branch `main` / root).
+
 ## Структура
 
 ```
-public/          статика (index, css, js, assets)
-server.js        Express + Telegram long-polling
-data/            локальный chat_id (не в git)
+public/                      статика (index, css, js, assets) — артефакт Pages
+server.js                    Express + Telegram long-polling
+.github/workflows/pages.yml  деплой только public/ на GitHub Pages
+data/                        локальный chat_id (не в git)
 ```

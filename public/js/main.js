@@ -339,12 +339,21 @@
           setTimeout(() => {
             if (success) success.hidden = true;
           }, 5000);
+        } else if (data.error) {
+          // Бэкенд ответил (валидация / rate-limit) — показываем его текст
+          showFormError(data.error);
         } else {
-          const msg = data.error || "Не удалось отправить заявку. Позвоните +7 903 419-16-92";
-          showFormError(msg);
+          // Нет API (GitHub Pages / 404 HTML) — запасной путь
+          showFormError(
+            "Не удалось отправить заявку: сервер заявок сейчас недоступен. " +
+              "Напишите в Telegram https://t.me/li4niirobotbot_bot или позвоните +7 903 419-16-92 (tel:+79034191692)."
+          );
         }
       } catch {
-        showFormError("Нет связи с сервером. Позвоните +7 903 419-16-92");
+        showFormError(
+          "Нет связи с сервером заявок. Откройте Telegram https://t.me/li4niirobotbot_bot " +
+            "или позвоните +7 903 419-16-92 (tel:+79034191692)."
+        );
       } finally {
         if (submitBtn) submitBtn.disabled = false;
         if (label) label.textContent = "Отправить заявку";
@@ -361,19 +370,24 @@
       box.setAttribute("role", "alert");
       form?.insertBefore(box, form.querySelector(".form-note"));
     }
-    box.textContent = message;
-    // Ссылка t.me кликабельна, если есть в тексте ошибки
-    const urlMatch = message.match(/https:\/\/t\.me\/[A-Za-z0-9_]+/);
-    if (urlMatch) {
-      box.textContent = message.slice(0, message.indexOf(urlMatch[0]));
+    box.textContent = "";
+    // Линкуем t.me и tel: из текста ошибки (запасной путь без API)
+    const linkRe = /(https:\/\/t\.me\/[A-Za-z0-9_]+)|(tel:\+?[\d\s()\-]{10,20})/g;
+    let last = 0;
+    let m;
+    while ((m = linkRe.exec(message)) !== null) {
+      box.appendChild(document.createTextNode(message.slice(last, m.index)));
       const a = document.createElement("a");
-      a.href = urlMatch[0];
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      a.textContent = urlMatch[0];
+      a.href = m[0];
+      if (m[0].startsWith("https://")) {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
+      a.textContent = m[0].startsWith("tel:") ? "+7 903 419-16-92" : m[0];
       box.appendChild(a);
-      box.appendChild(document.createTextNode(message.slice(message.indexOf(urlMatch[0]) + urlMatch[0].length)));
+      last = m.index + m[0].length;
     }
+    box.appendChild(document.createTextNode(message.slice(last)));
     box.hidden = false;
     clearTimeout(showFormError._t);
     showFormError._t = setTimeout(() => {
