@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0B0B0C"/>
+  <rect x="40" y="40" width="1120" height="550" stroke="#FFD600" stroke-opacity="0.25" stroke-width="2"/>
+  <path d="M520 120L380 320h100l-20 160 180-280H520V120z" fill="#FFD600"/>
+  <text x="80" y="520" fill="#F5F3EF" font-family="Arial Black, Arial, sans-serif" font-size="72" font-weight="800">ЭЛЕКТРИК · СПб</text>
+  <text x="80" y="575" fill="#8a8790" font-family="Arial, sans-serif" font-size="28">Выезд частного мастера · Ленобласть</text>
+</svg>
