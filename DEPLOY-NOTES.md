@@ -10,7 +10,7 @@
 | Локальный запуск | любой static server | `npm start` (Node ≥18, порт 3000) |
 | Версия | — | `package.json` → `2.0.0` |
 
-Контакты: телефон **+7 903 419-16-92**, бот **https://t.me/li4niirobotbot_bot**.
+Контакты: телефон **+7 903 419-16-92**, бот **https://t.me/ElectricFix_Bot**.
 
 ## Файлы фронта (`public/`)
 

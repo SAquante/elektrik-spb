@@ -265,7 +265,7 @@ async function handleUpdate(update) {
   const text = String(msg.text || "").trim();
   const from = msg.from?.first_name || "друг";
 
-  if (text === "/start" || text === "/start@li4niirobotbot_bot") {
+  if (text === "/start" || text === "/start@ElectricFix_Bot") {
     saveAdminChatId(chatId);
     const flushed = await flushPending(chatId);
     await tgApi("sendMessage", {
@@ -360,7 +360,7 @@ async function main() {
     console.log(`📨 Заявки → chat_id ${chatId}`);
   } else {
     console.log("⚠️  Chat ID не сохранён. Напишите боту /start — он закрепит чат.");
-    console.log("   https://t.me/li4niirobotbot_bot");
+    console.log("   https://t.me/ElectricFix_Bot");
   }
 
   app.listen(PORT, () => {

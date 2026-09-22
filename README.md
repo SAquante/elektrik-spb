@@ -1,4 +1,4 @@
-# Электрик · СПб
+# Вольта · электрик СПб
 
 Лендинг частного электрика + Telegram-бот для заявок.
 
@@ -21,7 +21,7 @@ npm start
 
 ### Подключение Telegram
 
-1. Откройте бота: https://t.me/li4niirobotbot_bot
+1. Откройте бота: https://t.me/ElectricFix_Bot
 2. Отправьте `/start` — чат закрепится, chat_id сохранится
 3. Заявки с формы будут приходить в этот чат
 
@@ -67,7 +67,7 @@ npm start
 Workflow `.github/workflows/pages.yml` публикует **только содержимое `public/`** (HTML/CSS/JS/assets) на GitHub Pages.
 
 - Express (`server.js`), `package.json` и `.env` остаются в репозитории — Pages их не использует.
-- **Заявки формы (`POST /api/lead`) и Telegram-бот работают только когда крутится Node** (VPS / Railway / Render). На чистом Pages API нет: форма показывает ошибку и предлагает написать в [Telegram](https://t.me/li4niirobotbot_bot) или позвонить.
+- **Заявки формы (`POST /api/lead`) и Telegram-бот работают только когда крутится Node** (VPS / Railway / Render). На чистом Pages API нет: форма показывает ошибку и предлагает написать в [Telegram](https://t.me/ElectricFix_Bot) или позвонить.
 - Локально и на сервере: `npm install && npm start` — как раньше.
 
 В Settings → Pages выберите Source: **GitHub Actions** (не branch `main` / root).

@@ -2,7 +2,7 @@
   "name": "elektrik-spb",
   "version": "2.0.0",
   "private": true,
-  "description": "Лендинг электрика СПб + Telegram-бот для заявок",
+  "description": "Вольта — лендинг электрика СПб + Telegram-бот для заявок",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -319,7 +319,8 @@
       if (label) label.textContent = "Отправляем…";
 
       try {
-        const res = await fetch("/api/lead", {
+        const apiBase = (typeof window !== "undefined" && window.VOLTA_API_BASE) ? String(window.VOLTA_API_BASE).replace(/\/$/, "") : "";
+        const res = await fetch(`${apiBase}/api/lead`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -346,12 +347,12 @@
           // Нет API (GitHub Pages / 404 HTML) — запасной путь
           showFormError(
             "Не удалось отправить заявку: сервер заявок сейчас недоступен. " +
-              "Напишите в Telegram https://t.me/li4niirobotbot_bot или позвоните +7 903 419-16-92 (tel:+79034191692)."
+              "Напишите в Telegram https://t.me/ElectricFix_Bot или позвоните +7 903 419-16-92 (tel:+79034191692)."
           );
         }
       } catch {
         showFormError(
-          "Нет связи с сервером заявок. Откройте Telegram https://t.me/li4niirobotbot_bot " +
+          "Нет связи с сервером заявок. Откройте Telegram https://t.me/ElectricFix_Bot " +
             "или позвоните +7 903 419-16-92 (tel:+79034191692)."
         );
       } finally {
