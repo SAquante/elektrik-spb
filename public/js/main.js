@@ -160,8 +160,8 @@
       delay: 0.75,
     });
 
-    // Generic reveals
-    gsap.utils.toArray(".reveal").forEach((el) => {
+    // Generic reveals (exclude .service-row — they have their own stagger)
+    gsap.utils.toArray(".reveal:not(.service-row)").forEach((el) => {
       gsap.from(el, {
         autoAlpha: 0,
         y: 40,
@@ -171,22 +171,42 @@
           trigger: el,
           start: "top 88%",
           toggleActions: "play none none none",
+          once: true,
         },
       });
     });
 
-    // Service rows stagger
-    gsap.from(".service-row", {
-      autoAlpha: 0,
-      x: -30,
-      duration: 0.8,
-      ease: "power2.out",
-      stagger: 0.08,
-      scrollTrigger: {
-        trigger: ".services-list",
-        start: "top 80%",
-      },
-    });
+    // Service rows — one stagger, never leave rows stuck at autoAlpha:0
+    const serviceRows = gsap.utils.toArray(".service-row");
+    const animateServices =
+      serviceRows.length > 0 &&
+      !window.matchMedia("(max-width: 759px)").matches;
+
+    if (animateServices) {
+      gsap.fromTo(
+        serviceRows,
+        { autoAlpha: 0, x: -30 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: 0.08,
+          // Do not hide until the trigger actually plays
+          immediateRender: false,
+          clearProps: "opacity,visibility,transform",
+          overwrite: true,
+          scrollTrigger: {
+            trigger: ".services-list",
+            start: "top 85%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+    } else if (serviceRows.length) {
+      gsap.set(serviceRows, { clearProps: "opacity,visibility,transform" });
+    }
 
     // Price rows
     gsap.from(".price-row", {
