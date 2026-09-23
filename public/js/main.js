@@ -353,7 +353,7 @@
             const successText = success.querySelector("p");
             if (successText && data.queued) {
               successText.textContent =
-                "Заявка принята. Скоро отвечу. Если срочно — звоните.";
+                "Заявка принята. Скоро отвечу с объёмом, ценой и датой. Если срочно — звоните.";
             }
             success.hidden = false;
           }
@@ -366,14 +366,14 @@
         } else {
           // Нет API (GitHub Pages / 404 HTML) — запасной путь
           showFormError(
-            "Не удалось отправить заявку — сервер сейчас не отвечает. " +
-              "Напишите в Telegram https://t.me/ElectricFix_Bot или позвоните +7 903 419-16-92 (tel:+79034191692)."
+            "Заявка не ушла — сервер сейчас не отвечает. " +
+              "Напишите в Telegram https://t.me/ElectricFix_Bot или позвоните +7 903 419-16-92 (tel:+79034191692) — посчитаю объём и цену."
           );
         }
       } catch {
         showFormError(
-          "Связи с сервером заявок нет. Напишите в Telegram https://t.me/ElectricFix_Bot " +
-            "или позвоните +7 903 419-16-92 (tel:+79034191692)."
+          "Сервер заявок не отвечает. Напишите в Telegram https://t.me/ElectricFix_Bot " +
+            "или позвоните +7 903 419-16-92 (tel:+79034191692) — посчитаю объём и цену."
         );
       } finally {
         if (submitBtn) submitBtn.disabled = false;
