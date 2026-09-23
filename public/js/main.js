@@ -336,7 +336,7 @@
       };
 
       if (submitBtn) submitBtn.disabled = true;
-      if (label) label.textContent = "Отправляем…";
+      if (label) label.textContent = "Отправляю…";
 
       try {
         const apiBase = (typeof window !== "undefined" && window.VOLTA_API_BASE) ? String(window.VOLTA_API_BASE).replace(/\/$/, "") : "";
@@ -353,7 +353,7 @@
             const successText = success.querySelector("p");
             if (successText && data.queued) {
               successText.textContent =
-                "Заявка принята и сохранена. Отвечу в ближайшее время. Если срочно — звоните.";
+                "Заявка принята. Скоро отвечу. Если срочно — звоните.";
             }
             success.hidden = false;
           }
@@ -366,13 +366,13 @@
         } else {
           // Нет API (GitHub Pages / 404 HTML) — запасной путь
           showFormError(
-            "Не удалось отправить заявку: сервер заявок сейчас недоступен. " +
+            "Не удалось отправить заявку — сервер сейчас не отвечает. " +
               "Напишите в Telegram https://t.me/ElectricFix_Bot или позвоните +7 903 419-16-92 (tel:+79034191692)."
           );
         }
       } catch {
         showFormError(
-          "Нет связи с сервером заявок. Откройте Telegram https://t.me/ElectricFix_Bot " +
+          "Связи с сервером заявок нет. Напишите в Telegram https://t.me/ElectricFix_Bot " +
             "или позвоните +7 903 419-16-92 (tel:+79034191692)."
         );
       } finally {
